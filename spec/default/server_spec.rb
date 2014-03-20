@@ -17,20 +17,9 @@ describe port('22') do
   it { should be_listening }
 end
 
-describe package('nodejs') do
-  it { should be_installed }
-end
 
-describe package('npm') do
-  it { should be_installed }
-end
-
-describe command('npm --version') do
-  it { should return_stdout(/\d+\.\d+\.\d+/)}
-end
-
-describe command('lt --help') do
-  it { should return_stdout(/Usage: .+\/lt --port /)}
+describe command('/opt/ngrok/ngrok help') do
+  it { should return_stdout(%r{\AUsage: /opt/ngrok/ngrok \[OPTIONS\] <local port or address>})}
 end
 
 

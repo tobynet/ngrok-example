@@ -9,6 +9,6 @@ task :default => :spec
 
 desc 'Test of running localtunnel'
 task :test_tunnel do
-  sh('vagrant ssh -c "lt --port 80"')
+  sh('vagrant ssh -c "/opt/ngrok/ngrok 80"')
 end
 

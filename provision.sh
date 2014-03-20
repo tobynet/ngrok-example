@@ -12,24 +12,18 @@ sudo apt-get -y install git-core build-essential
 sudo ufw allow ssh
 sudo ufw enable
 
-#Too old...
-# sudo apt-get -y install nodejs npm
-# npm config set ca=""
 
-# Install n and node.js
-n_directory='/opt/n'
-if ! [ -d '/opt/n/.git' ]; then
-  sudo git clone https://github.com/visionmedia/n.git $n_directory
-fi
-
-cd $n_directory
-sudo make install
+# Install ngrok
+sudo apt-get -y install unzip
 hash -r
-n stable
 
-# Install localtunnel
-hash -r
-sudo npm install -g localtunnel
+NGROK_DIR=/opt/ngrok
+mkdir -p "$NGROK_DIR"
+pushd "$NGROK_DIR"
+    curl -o ngrok.zip https://dl.ngrok.com/linux_386/ngrok.zip
+    rm ngrok
+    unzip ngrok.zip
+popd
 
 
 # Install test server
@@ -38,5 +32,5 @@ sudo service nginx start
 
 sudo apt-get -y autoremove
 
-echo '[INFO] Run localtunnel as `lt --port 80`'
+echo '[INFO] Run ngrok as `/opt/ngrok/ngrok 80`'
 
